@@ -18,6 +18,7 @@ public class CombatManager {
 
     public void tagPlayer(Player player) {
         combatTags.put(player.getUniqueId(), System.currentTimeMillis());
+        plugin.getScoreboardManager().updateScoreboard(player);
 
         new BukkitRunnable() {
             @Override
@@ -25,6 +26,7 @@ public class CombatManager {
                 if (isInCombat(player)) {
                     combatTags.remove(player.getUniqueId());
                     player.sendMessage("§aYou are no longer in combat!");
+                    plugin.getScoreboardManager().updateScoreboard(player);
                 }
             }
         }.runTaskLater(plugin, COMBAT_TAG_DURATION * 20L);

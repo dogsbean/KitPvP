@@ -69,5 +69,6 @@ public class KitCommand implements CommandExecutor {
 
         plugin.getKitManager().selectKit(player, kitName);
         player.sendMessage("§aSelected kit: " + kitName);
+        plugin.getScoreboardManager().updateScoreboard(player);
     }
 }

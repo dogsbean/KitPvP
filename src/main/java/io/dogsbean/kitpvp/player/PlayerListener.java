@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -14,6 +15,11 @@ public class PlayerListener implements Listener {
 
     public PlayerListener(Main plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        plugin.getScoreboardManager().updateScoreboard(event.getPlayer());
     }
 
     @EventHandler
@@ -26,6 +32,7 @@ public class PlayerListener implements Listener {
             String selectedKit = plugin.getKitManager().getSelectedKit(player);
             if (selectedKit != null) {
                 plugin.getKitManager().applyKit(player, selectedKit);
+                plugin.getScoreboardManager().updateScoreboard(player);
             }
         }
 
@@ -52,6 +59,9 @@ public class PlayerListener implements Listener {
 
         plugin.getCombatManager().tagPlayer(victim);
         plugin.getCombatManager().tagPlayer(attacker);
+
+        plugin.getScoreboardManager().updateScoreboard(victim);
+        plugin.getScoreboardManager().updateScoreboard(attacker);
     }
 
     @EventHandler
@@ -68,5 +78,10 @@ public class PlayerListener implements Listener {
             plugin.getKillstreakManager().addKill(killer);
         }
         plugin.getKillstreakManager().resetKillstreak(victim);
+
+        plugin.getScoreboardManager().updateScoreboard(victim);
+        if (killer != null) {
+            plugin.getScoreboardManager().updateScoreboard(killer);
+        }
     }
 }
