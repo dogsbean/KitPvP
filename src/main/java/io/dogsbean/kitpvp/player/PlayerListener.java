@@ -33,6 +33,7 @@ public class PlayerListener implements Listener {
             if (selectedKit != null) {
                 plugin.getKitManager().applyKit(player, selectedKit);
                 plugin.getScoreboardManager().updateScoreboard(player);
+                player.sendMessage("§cYou left spawn.");
             }
         }
 

@@ -2,6 +2,7 @@ package io.dogsbean.kitpvp.kit.manager;
 
 import io.dogsbean.kitpvp.Main;
 import io.dogsbean.kitpvp.kit.Kit;
+import io.dogsbean.kitpvp.player.PlayerUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
@@ -38,8 +39,7 @@ public class KitManager {
         Kit kit = kits.get(kitName.toLowerCase());
         if (kit == null) return;
 
-        player.getInventory().clear();
-        player.getInventory().setArmorContents(null);
+        PlayerUtils.resetInventory(player);
 
         player.getInventory().setContents(kit.getItems());
         player.getInventory().setArmorContents(kit.getArmor());
