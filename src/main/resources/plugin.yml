@@ -1,0 +1,11 @@
+name: KitPvP
+version: 1.0
+main: io.dogsbean.kitpvp.Main
+api-version: 1.8.8
+commands:
+  kit:
+    description: Kit management command
+    usage: /kit <create|delete|list|select> [kitname]
+  spawn:
+    description: Teleport to spawn
+    usage: /spawn
